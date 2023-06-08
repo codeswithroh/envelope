@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #ffffff;
+      }
+      .envelope {
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        max-width: 25em;
+        height: calc(45vw * 0.5);
+        max-height: 12.5em;
+        border-radius: 0.25em;
+        background: lemonchiffon;
+      }
+      .envelope:before,
+      .envelope:after {
+        position: absolute;
+        top: -0.25em;
+        width: 100%;
+        height: 30%;
+        content: "";
+      }
+      .envelope:before {
+        left: 0;
+        border-radius: 0 0 0 0.25em;
+        box-shadow: -0.2em 0.2em 0.2em dimgrey;
+        transform-origin: bottom left;
+        transition: transform 0.5s ease-in-out;
+      }
+      .envelope.open:before {
+        transform: rotateX(-180deg);
+      }
+      .envelope:after {
+        right: 0;
+        border-radius: 0 0 0.25em 0;
+        transform-origin: bottom right;
+        transition: transform 0.5s ease-in-out;
+      }
+      .envelope.open:after {
+        transform: rotateX(-180deg);
+      }
+
+      #card {
+        display: none;
+        position: absolute;
+        top: calc(50% + (45vw * 0.5) / 2);
+        left: 50%;
+        transform-origin: top center;
+        transform: translate(-50%, -50%) scaleY(0);
+        text-align: center;
+        width: calc(90vw * 0.9);
+        max-width: 22.5em;
+        height: calc((45vw * 0.5) * 0.8);
+        max-height: 10em;
+        background-color: #e6d5b8;
+        border-radius: 0.25em;
+        transition: transform 0.5s ease-in-out 0.5s;
+      }
+
+      #card.open {
+        display: block;
+        animation-name: card-emerge;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes card-emerge {
+        0% {
+          transform: translate(-50%, -50%) scaleY(0);
+          opacity: 1;
+        }
+
+        20% {
+          transform: translate(-50%, -150%) scaleY(1);
+          opacity: 1;
+        }
+
+        40% {
+          transform: translate(-50%, -100%) scaleY(1);
+          opacity: 1;
+        }
+
+        60% {
+          transform: translate(-50%, -125%) scaleY(1);
+          opacity: 1;
+        }
+
+        80% {
+          transform: translate(-50%, -110%) scaleY(1);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translate(-50%, -115%) scaleY(1);
+          opacity: 1;
+        }
+      }
+
+      p {
+        font-size: calc(16px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+        margin-top: calc(30% + (40 - 30) * ((100vw - 300px) / (1600 - 300)));
+        text-align: center;
+        line-height: 2;
+        position: relative;
+        z-index: 2;
+      }
+
+      #card p {
+        margin-top: 2em;
+      }
+
+      #card p:before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        bottom: -10px;
+        left: -10px;
+        right: -10px;
+        z-index: -1;
+      }
+
+      @media (min-width: 600px) {
+        #card {
+          top: calc(50% + 6.25em);
+          width: 22.5em;
+          height: 10em;
+        }
+      }
+
+      /* Reset button styles */
+      button.reset-button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        padding: 0.75rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+      button.reset-button:hover {
+        background-color: #3e8e41;
+      }
+
+      /* Footer text styles */
+      .footer-text {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 1em;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="envelope" onclick="openEnvelope()">
+      <p>Open to pass the exam</p>
+    </div>
+    <div id="card">
+      <p>Fuck You 🤣😆😂</p>
+    </div>
+    <button class="reset-button" onclick="resetAnimation()">Reset</button>
+    <div class="footer-text">Made with ❤️ by Rohit Purkait</div>
+    <script>
+      function openEnvelope() {
+        document.querySelector(".envelope").classList.add("open");
+        document.getElementById("card").classList.add("open");
+      }
+
+      function resetAnimation() {
+        document.querySelector(".envelope").classList.remove("open");
+        document.getElementById("card").classList.remove("open");
+      }
+    </script>
+  </body>
+</html>
